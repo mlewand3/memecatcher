@@ -46,7 +46,8 @@ def profile():
             all_pages=all_pages,
         )
     else:
-        session["checkpoints"] = {request.form.keys()}
+        session["checkpoints"] = {}
+        session["pages"] = list(request.form.keys())
         return redirect("/")
 
 
