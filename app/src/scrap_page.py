@@ -1,4 +1,3 @@
-from itertools import chain, zip_longest
 from typing import List
 
 from .util import (create_soup, extract_tag_content, find_in_results,
@@ -60,8 +59,8 @@ def scrap_pages(pages: List[str], checkpoints):
     memes_lists = []
 
     for page in pages:
-        meme_list, checkpoint = scrap_page(page.name, checkpoints.get(page.name))
-        checkpoints[page.name] = checkpoint
+        meme_list, checkpoint = scrap_page(page, checkpoints.get(page))
+        checkpoints[page] = checkpoint
         memes_lists.append(meme_list)
 
     shuffled_meme_list = _shuffle_lists(memes_lists)

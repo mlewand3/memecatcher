@@ -7,49 +7,45 @@
     </head>
     <body style ="background-color: #171a1e;">
 
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-11 col-sm-11 col-lg-11 center-block">
-                    <span class="form-horizontal">
+    <div class="container center-block">
+        <div class="row center-block">
+            <div class="col-xs-10 col-sm-10 col-lg-10 center-block">
+                <span class="form-horizontal">
 
-                        <div class="form-group">
-                            <div class="col-xs-4">
-                                <form action="/" method="POST">
-                                    <button type="submit" class="btn btn-primary btn-lg btn-block">
-                                        REFRESH
-                                    </button>
-                                </form>
-                            </div>
-
-                            <div class="col-xs-4">
-                                <a type="button" class="btn btn-primary btn-lg btn-block" href="/profile">
-                                    SETTINGS
-                                </a>
-                            </div>
-
-                            <div class="col-xs-4">
-                                <a type="button" class="btn btn-primary btn-lg btn-block" href="/user/sign-out">
-                                    LOGOUT
-                                </a>
-                            </div>
+                    <div class="form-group">
+                        <div class="col-xs-5 col-sm-5 col-lg-5">
+                            <form action="/" method="POST">
+                                <button type="submit" class="btn btn-primary btn-lg btn-block">
+                                    BACK TO BEGGINING
+                                </button>
+                            </form>
                         </div>
-                    </span>
-                </div>
+
+                        <div class="col-xs-5 col-sm-5 col-lg-5">
+                            <a type="button" class="btn btn-primary btn-lg btn-block" href="/profile">
+                                SETTINGS
+                            </a>
+                        </div>
+
+                    </div>
+                </span>
             </div>
         </div>
+    </div>
 
-        <div class="container" width="80%" align="center">
+    <center>
+        <div class="col-xs-12 col-sm-12 col-lg-12 align-items-center">
             {% for meme in memes %}
 
-                <img src="{{ meme["src"] }}"></img>
-
+                <img src="{{ meme["src"] }}"></img><br>
             {% endfor %}
         </div>
-        <div class="container" width="80%" align="center">
-            <a type="button" class="btn btn-primary btn-lg btn-block" href="/" width="80%" align="center">
-                MOAR
-            </a>
-        </div>
+    </center>
+    <div class="col-xs-11 col-sm-11 col-lg-11 center-block">
+        <a type="button" class="btn btn-primary btn-lg btn-block" href="/" width="80%" align="center">
+            MOAR
+        </a>
+    </div>
     </body>
 
 {% endblock %}

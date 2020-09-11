@@ -4,10 +4,6 @@
 {% block content %}
 
 <div class="container">
-    <h2>
-        Username: {{ current_user.username }} 
-    </h2>
-    <hr>
     <h3>
         Pages:
     </h3>
@@ -16,22 +12,22 @@
         <table cellspacing=0 class="table table-bordered table-hover table-striped" id="pages" width=100%>
             <thead>
                 <tr>
-                    {% for page in pages %}
-                        <th> {{ page.name }} </th>
+                    {% for page in all_pages %}
+                        <th> {{ page }} </th>
                     {% endfor %}
                 </tr>
             </thead>
                 <tr> 
                     <tbody>
-                        {% for page in pages %}
+                        {% for page in all_pages %}
                             <td>
                                 <div class="form-check">
                                     <input class="form-check-input" 
                                         type="checkbox"
-                                        value={{ page.name }}
-                                        id={{ page.name }}
-                                        name={{ page.name }} 
-                                        {% if page.name in current_user.all_pages %}checked{% endif %}>
+                                        value={{ page }}
+                                        id={{ page }}
+                                        name={{ page }} 
+                                        {% if page in all_pages %}checked{% endif %}>
                                 </div>
                             </td>
                         {% endfor %}
