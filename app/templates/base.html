@@ -7,45 +7,42 @@
     </head>
     <body style ="background-color: #171a1e;">
 
-    <div class="container center-block">
-        <div class="row center-block">
-            <div class="col-xs-10 col-sm-10 col-lg-10 center-block">
-                <span class="form-horizontal">
+    <span class="form-horizontal">
+        <div class="form-group">
 
-                    <div class="form-group">
-                        <div class="col-xs-5 col-sm-5 col-lg-5">
-                            <form action="/" method="POST">
-                                <button type="submit" class="btn btn-primary btn-lg btn-block">
-                                    BACK TO BEGGINING
-                                </button>
-                            </form>
-                        </div>
-
-                        <div class="col-xs-5 col-sm-5 col-lg-5">
-                            <a type="button" class="btn btn-primary btn-lg btn-block" href="/profile">
-                                SETTINGS
-                            </a>
-                        </div>
-
-                    </div>
-                </span>
+            <div class="col-xs-6 col-sm-6 col-lg-6">
+                <form action="/" method="POST">
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">
+                        GO TO TOP
+                    </button>
+                </form>
             </div>
+
+            <div class="col-xs-6 col-sm-6 col-lg-6">
+                <a type="button" class="btn btn-primary btn-lg btn-block" href="/profile">
+                    SETTINGS
+                </a>
+            </div>
+
         </div>
-    </div>
+    </span>
 
     <center>
         <div class="col-xs-12 col-sm-12 col-lg-12 align-items-center">
             {% for meme in memes %}
 
-                <img src="{{ meme["src"] }}"></img><br>
+                <img class="img-responsive" src="{{ meme["src"] }}"></img><br>
+
             {% endfor %}
         </div>
     </center>
-    <div class="col-xs-11 col-sm-11 col-lg-11 center-block">
-        <a type="button" class="btn btn-primary btn-lg btn-block" href="/" width="80%" align="center">
+
+    <div class="col-xs-12 col-sm-12 col-lg-12 center-block">
+        <a type="button" class="btn btn-primary btn-lg btn-block" href="/" >
             MOAR
         </a>
     </div>
+
     </body>
 
 {% endblock %}

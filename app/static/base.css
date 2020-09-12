@@ -1,8 +1,14 @@
+body {
+  height: 100%;
+  margin: 0;
+  padding: 1em;
+}
+
 img {
-    padding-top:50px;
-    padding-bottom:50px;
-    padding-right:50px;
-    padding-left:50px;
+    padding-top:5%;
+    padding-bottom:5%;
+    padding-left:5%;
+    padding-right:5%;
     background-color: #26292d;
     align:"center";
 }
