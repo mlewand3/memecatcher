@@ -5,42 +5,46 @@
     <head>
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='base.css') }}"/>
     </head>
-    <body style ="background-color: #171a1e;">
 
-    <span class="form-horizontal">
-        <div class="form-group">
+    <body>
 
-            <div class="col-xs-6 col-sm-6 col-lg-6">
-                <form action="/" method="POST">
-                    <button type="submit" class="btn btn-primary btn-lg btn-block">
-                        GO TO TOP
-                    </button>
-                </form>
+    <div class="container-fluid no-padding">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-lg-9 col-md-9 col-md-offset-3 col-lg-offset-3 col-sm-offset-0 col-xs-offset-0">
+
+                <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+                    <form action="/" method="POST">
+                        <button type="submit" class="btn btn-primary btn-lg btn-block">
+                            GO TO TOP
+                        </button>
+                    </form>
+                </div>
+
+                <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+                    <a type="button" class="btn btn-primary btn-lg btn-block" href="/profile">
+                        SETTINGS
+                    </a>
+                </div>
             </div>
-
-            <div class="col-xs-6 col-sm-6 col-lg-6">
-                <a type="button" class="btn btn-primary btn-lg btn-block" href="/profile">
-                    SETTINGS
-                </a>
-            </div>
-
         </div>
-    </span>
+    </div>
+
+    <br><br>
 
     <center>
-        <div class="col-xs-12 col-sm-12 col-lg-12 align-items-center">
-            {% for meme in memes %}
-
-                <img class="img-responsive" src="{{ meme["src"] }}"></img><br>
-
-            {% endfor %}
-        </div>
+      {% for meme in memes %} 
+          <img class="img-responsive" src="{{ meme["src"] }}"></img><br>
+      {% endfor %}
     </center>
 
-    <div class="col-xs-12 col-sm-12 col-lg-12 center-block">
-        <a type="button" class="btn btn-primary btn-lg btn-block" href="/" >
-            MOAR
-        </a>
+    <div class="container-fluid no-padding">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-lg-6 col-md-6 col-md-offset-3 col-lg-offset-3 col-sm-offset-0 col-xs-offset-0">
+                <a type="button" class="btn btn-primary btn-lg btn-block" href="/" >
+                    MOAR
+                </a>
+            </div>
+        </div>
     </div>
 
     </body>

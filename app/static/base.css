@@ -2,13 +2,9 @@ body {
   height: 100%;
   margin: 0;
   padding: 1em;
+  background-color: #171a1e;
 }
 
 img {
-    padding-top:5%;
-    padding-bottom:5%;
-    padding-left:5%;
-    padding-right:5%;
-    background-color: #26292d;
-    align:"center";
+    padding-bottom:3%;
 }
