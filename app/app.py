@@ -1,16 +1,19 @@
+import json
 import os
 
-from flask import Flask, render_template, request, session
+from flask import (Flask, make_response, render_template, request, session,
+                   url_for)
 from flask_bootstrap import Bootstrap
 from werkzeug.utils import redirect
 
-from .src.scrap_page import scrap_pages
+from .src import pages_data, scrap_pages
+from .src.util import get_pages_to_show_from_cookies
 
 app = Flask(__name__)
 bootstrap = Bootstrap(app)
 app.config.from_object(os.environ.get("APP_CONFIG"))
 
-all_pages = ["JBZD", "kwejk", "faktopedia", "demotywatory"]
+all_pages = list(pages_data.keys())
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -20,7 +23,7 @@ def meme_page():
             session["checkpoints"] = {}
 
         memes, checkpoints = scrap_pages(
-            pages=session.get("pages", ["JBZD", "kwejk"]),
+            pages=get_pages_to_show_from_cookies(),
             checkpoints=session.get("checkpoints", {}),
         )
 
@@ -42,13 +45,16 @@ def profile():
         return render_template(
             template_name_or_list="profile.html",
             title="Profle",
-            pages=session.get("pages", ["JBZD", "kwejk"]),
+            pages=get_pages_to_show_from_cookies(),
             all_pages=all_pages,
         )
     else:
         session["checkpoints"] = {}
-        session["pages"] = list(request.form.keys())
-        return redirect("/")
+
+        response = make_response(redirect("/"))
+        response.set_cookie("pages", json.dumps(list(request.form.keys())))
+
+        return response
 
 
 if __name__ == "__main__":

@@ -1,38 +1,24 @@
 from typing import List
 
+from .pages_data import pages_data
 from .util import (create_soup, extract_tag_content, find_in_results,
-                   get_url_content, search_in_soup)
-
-pages_data = {
-    "JBZD": {
-        "url": "https://jbzd.com.pl/",
-        "tags": ["alt", "src"],
-        "img_pattern": {"name": "img", "attrs": {"class": "article-image"}},
-        "page_pattern": {"name": "a", "attrs": {"class": "pagination-next"}},
-    },
-    "kwejk": {
-        "url": "https://kwejk.pl/",
-        "tags": ["alt", "src"],
-        "img_pattern": {"name": "img", "attrs": {"class": "full-image"}},
-        "page_pattern": {"name": "a", "attrs": {"class": "btn btn-next btn-gold"}},
-    },
-    "faktopedia": {
-        "url": "https://faktopedia.pl/",
-        "tags": ["alt", "src"],
-        "img_prefix": "https://faktopedia.pl",
-        "img_pattern": {"name": "img", "attrs": {"class": "pic"}},
-        "page_pattern": {"name": "a", "attrs": {"class": "prefetch list_next_page_button"}},
-    },
-    "demotywatory": {
-        "url": "https://demotywatory.pl/",
-        "tags": ["alt", "src"],
-        "img_pattern": {"name": "img", "attrs": {"class": "demot"}},
-        "page_pattern": {"name": "a", "attrs": {"class": "prefetch list_next_page_button"}},
-    },
-}
+                   get_url_content, search_in_soup, shuffle_lists)
 
 
-def scrap_page(page: dict, checkpoint):
+def scrap_pages(pages: List[str], checkpoints: List[dict]):
+    memes_lists = []
+
+    for page in pages:
+        meme_list, checkpoint = scrap_page(page, checkpoints.get(page))
+        checkpoints[page] = checkpoint
+        memes_lists.append(meme_list)
+
+    shuffled_meme_list = shuffle_lists(memes_lists)
+
+    return shuffled_meme_list, checkpoints
+
+
+def scrap_page(page: dict, checkpoint: dict):
     page_data = pages_data[page]
 
     if not checkpoint:
@@ -53,29 +39,3 @@ def scrap_page(page: dict, checkpoint):
         images = [{"alt": img["alt"], "src": prefix + img["src"]} for img in images]
 
     return images, checkpoint
-
-
-def scrap_pages(pages: List[str], checkpoints):
-    memes_lists = []
-
-    for page in pages:
-        meme_list, checkpoint = scrap_page(page, checkpoints.get(page))
-        checkpoints[page] = checkpoint
-        memes_lists.append(meme_list)
-
-    shuffled_meme_list = _shuffle_lists(memes_lists)
-
-    return shuffled_meme_list, checkpoints
-
-
-def _shuffle_lists(_lists):
-    result = []
-
-    while any(_lists):
-        for _list in _lists:
-            if len(_list) == 0:
-                pass
-            else:
-                result.append(_list.pop(0))
-
-    return result
