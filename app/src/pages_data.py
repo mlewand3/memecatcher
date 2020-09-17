@@ -33,7 +33,9 @@ pages_data = {
     "chamsko": {
         "url": "https://www.chamsko.pl/",
         "img_tag": "src",
-        "img_pattern": {"name": "img-responsive", "attrs": {"alt": ""}},
-        "page_pattern": {"name": "a", "attrs": {}},
+        "img_prefix": "https://www.chamsko.pl",
+        "img_pattern": {"name": "img", "attrs": {"alt": ""}},
+        "page_prefix": "https://www.chamsko.pl",
+        "page_pattern": {"name": "a", "text": "Kolejna strona"},
     },
 }
