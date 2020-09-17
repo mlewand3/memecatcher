@@ -1,25 +1,20 @@
 from typing import List
 
 from .pages_data import pages_data
-from .util import (add_next_page_prefix, add_src_prefix, create_soup,
-                   extract_tag_content, find_in_results, get_url_content,
-                   search_in_soup, shuffle_lists)
+from .util import (add_src_prefix, create_soup, find_in_results,
+                   get_url_content, search_in_soup, shuffle_lists)
 
 
-def scrap_pages(pages: List[str], checkpoints: List[dict]):
+def scrap_pages(pages: List[str], urls: List[dict]):
     images = []
-    new_checkpoints = {}
 
-    for page in pages:
-        url = checkpoints[page]
-        new_images, new_checkpoint = scrap_page(page=page, url=url)
-
-        new_checkpoints[page] = new_checkpoint
+    for page, url in zip(pages, urls):
+        new_images = scrap_page(page=page, url=url)
         images.append(new_images)
 
     shuffled_images = shuffle_lists(images)
 
-    return shuffled_images, new_checkpoints
+    return shuffled_images
 
 
 def scrap_page(page: str, url: str):
@@ -27,9 +22,8 @@ def scrap_page(page: str, url: str):
     soup = create_soup(page_content=page_content)
 
     images = find_images(soup, page)
-    checkpoint = find_checkpoint(soup, page)
 
-    return images, checkpoint
+    return images
 
 
 def find_images(soup, page: str):
@@ -42,11 +36,42 @@ def find_images(soup, page: str):
     return images_with_prefix
 
 
-def find_checkpoint(soup, page):
-    """Find anchro tag which directs to next page of memes in scrapped page."""
+def get_pages_urls(pages: List[str], page_number: int) -> List[str]:
+    urls = []
 
-    next_page_data = search_in_soup(soup=soup, pattern=pages_data[page]["page_pattern"])
-    checkpoint = extract_tag_content(result=next_page_data, tag="href")
-    checkpoint_with_prefix = add_next_page_prefix(checkpoint, pages_data[page].get("page_prefix"))
+    for page in pages:
+        if pages_data[page]["page_direction"] == "increasing":
+            url = pages_data[page]["url"] + pages_data[page]["page_prefix"] + str(page_number)
+            urls.append(url)
 
-    return checkpoint_with_prefix
+        elif pages_data[page]["page_direction"] == "decreasing":
+
+            if not pages_data[page].get("start_from"):
+                pages_data[page]["start_from"] = find_starting_page(page)
+
+            number = pages_data[page]["start_from"] - page_number
+            url = pages_data[page]["url"] + pages_data[page]["page_prefix"] + str(number)
+
+            urls.append(url)
+
+    return urls
+
+
+def find_starting_page(page: dict) -> int:
+    page_content = get_url_content(url=pages_data[page]["url"])
+    soup = create_soup(page_content=page_content)
+    results = search_in_soup(soup, pages_data[page]["page_pattern"])
+
+    number = extract_page_number(results)
+
+    return number
+
+
+def extract_page_number(results) -> int:
+    for result in results[0]:
+        try:
+            number = result.text
+        except AttributeError:
+            pass
+
+    return int(number)
