@@ -12,7 +12,6 @@ pages_data = {
         "img_tag": "src",
         "page_direction": "decreasing",
         "page_prefix": "strona/",
-        "start_from": None,
         "page_pattern": {"name": "li", "attrs": {"class": "current"}},
     },
     "faktopedia": {

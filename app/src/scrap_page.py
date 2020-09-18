@@ -45,11 +45,7 @@ def get_pages_urls(pages: List[str], page_number: int) -> List[str]:
             urls.append(url)
 
         elif pages_data[page]["page_direction"] == "decreasing":
-
-            if not pages_data[page].get("start_from"):
-                pages_data[page]["start_from"] = find_starting_page(page)
-
-            number = pages_data[page]["start_from"] - page_number
+            number = find_starting_page(page) - page_number
             url = pages_data[page]["url"] + pages_data[page]["page_prefix"] + str(number)
 
             urls.append(url)
