@@ -1,35 +1,43 @@
-from typing import List
+def find_tag_in_results(results, tag_to_find: str):
+    """Finds in BeutifulSoup result for given tag.
 
+    Attrs:
+        results: ?
+        tag: string representing tag to be found on results.
 
-def find_in_results(results, tag_to_find: str, tag_label: str = "src"):
-    """Finds in BeutifulSoup result for given tag."""
+    Returns:
+        Tag object which fits given condition.
+    """
 
     find_results = []
 
     for result in results:
         try:
-            find_results.append({tag_label: result[tag_to_find]})
+            find_results.append(result[tag_to_find])
         except KeyError:
             pass
 
     return find_results
 
 
-def add_src_prefix(images: List[str], img_prefix: str) -> List[str]:
-    """Iterates through list of image tags, and add prefix (if needed).
-
-    Some of the results can be ad which are caught by accident, presuming it is those image which
-    have complete url (with "http") already.
+def find_page_number(results) -> int:
     """
-    pages_with_prefix_added = []
+    Search for the page number in page patterns and return first result which can be
+    intrepreted as page number (we assume that the first result will be these with highest number).
 
-    if not img_prefix:
-        return images
+    Attrs:
+        results: ???
 
-    for image in images:
-        if "http" in image["src"]:
+    Returns:
+        Single integer number representing page number.
+    """
+
+    for result in results[0]:
+        try:
+            number = result.text
+            return int(number)
+
+        except AttributeError:
             pass
-        else:
-            pages_with_prefix_added.append({"src": img_prefix + image["src"]})
 
-    return pages_with_prefix_added
+    return 0

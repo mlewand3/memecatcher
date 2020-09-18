@@ -1,7 +1,7 @@
-from typing import List
+from typing import Any, List
 
 
-def shuffle_lists(_lists: List[list]):
+def shuffle_lists(_lists: List[Any]):
     """
     Merges two (or more lists) into one in a way that elements from those list appears alternately.
 
@@ -26,6 +26,11 @@ def shuffle_lists(_lists: List[list]):
 
         >>> ["a", "1", "b", "2", "c", "3", "d", "e"]
 
+    Attrs:
+       _lists - lists of lists
+
+    Returns:
+        single lists merged from given list of lists.
     """
     result = []
 
