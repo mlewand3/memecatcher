@@ -47,11 +47,26 @@ pages_data = {
     "pocisk": {
         "url": "https://pocisk.org/",
         "img_tag": "data-src",
-        "img_pattern": {
-            "name": "img",
-            "attrs": {"class": "wp-post-image"},
-        },
+        "img_pattern": {"name": "img", "attrs": {"class": "wp-post-image"}},
         "page_prefix": "page/",
         "page_direction": "increasing",
+    },
+    "wiocha": {
+        "url": "https://www.wiocha.pl/",
+        "img_tag": "src",
+        "img_pattern": {"name": "img", "attrs": {"class": "imageitself", "title": "", "alt": ""}},
+        "page_prefix": "absurdy,",
+        "page_direction": "increasing",
+    },
+    "sadistic": {
+        "url": "https://www.sadistic.pl/obrazki/",
+        "img_tag": "src",
+        "img_pattern": {
+            "name": "img",
+            "attrs": {"alt": "", "style": "max-width: 775px; display: block; margin: 0 auto"},
+        },
+        "page_prefix": "/",
+        "page_direction": "decreasing",
+        "page_pattern": {"name": "div", "attrs": {"class": "pagination"}},
     },
 }

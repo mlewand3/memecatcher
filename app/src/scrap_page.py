@@ -45,7 +45,7 @@ def get_pages_urls(pages: List[str], page_number: int) -> List[str]:
             urls.append(url)
 
         elif pages_data[page]["page_direction"] == "decreasing":
-            number = find_starting_page(page) - page_number
+            number = find_starting_page(page) - page_number + 1
             url = pages_data[page]["url"] + pages_data[page]["page_prefix"] + str(number)
 
             urls.append(url)
@@ -64,10 +64,17 @@ def find_starting_page(page: dict) -> int:
 
 
 def extract_page_number(results) -> int:
+    """
+    Search for the page number in page patterns and return first result which can be
+    intrepreted as page number (we assume that the first result will be these with highest number).
+    """
+
     for result in results[0]:
         try:
             number = result.text
+            return int(number)
+
         except AttributeError:
             pass
 
-    return int(number)
+    return 0
