@@ -44,4 +44,14 @@ pages_data = {
         "page_prefix": "page/",
         "page_direction": "increasing",
     },
+    "pocisk": {
+        "url": "https://pocisk.org/",
+        "img_tag": "data-src",
+        "img_pattern": {
+            "name": "img",
+            "attrs": {"class": "wp-post-image"},
+        },
+        "page_prefix": "page/",
+        "page_direction": "increasing",
+    },
 }
