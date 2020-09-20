@@ -1,7 +1,7 @@
-from bs4 import BeautifulSoup
+import bs4
 
 
-def create_soup(page_content: str) -> BeautifulSoup:
+def create_soup(page_content: str) -> bs4.BeautifulSoup:
     """Creates BeautifulSoup object.
 
     Attrs:
@@ -11,10 +11,10 @@ def create_soup(page_content: str) -> BeautifulSoup:
         BeautifulSoup object representing page content.
     """
 
-    return BeautifulSoup(page_content, "html.parser")
+    return bs4.BeautifulSoup(page_content, "html.parser")
 
 
-def search_in_soup(soup: BeautifulSoup, pattern: dict):
+def search_in_soup(soup: bs4.BeautifulSoup, pattern: dict) -> bs4.element.ResultSet:
     """Search for specific pattern in BeautifulSoup object.
 
     Attrs:
