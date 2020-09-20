@@ -21,18 +21,18 @@ def meme_page(page_number: int = 1):
     memes = pages_scrapper.scrap_pages(pages, page_number)
 
     return render_template(
-        template_name_or_list="base.html",
+        template_name_or_list="meme_page.html",
         title="Meme Catcher",
         memes=memes,
         page_number=page_number,
     )
 
 
-@app.route("/profile", methods=["GET", "POST"])
-def profile():
+@app.route("/options", methods=["GET", "POST"])
+def options():
     if request.method == "GET":
         return render_template(
-            template_name_or_list="profile.html",
+            template_name_or_list="options.html",
             title="Profle",
             pages=get_pages_to_show_from_cookies(),
             all_pages=pages_scrapper.get_all_pages_available,
