@@ -33,7 +33,7 @@ def options():
     if request.method == "GET":
         return render_template(
             template_name_or_list="options.html",
-            title="Profle",
+            title="Options",
             pages=get_pages_to_show_from_cookies(),
             all_pages=pages_scrapper.get_all_pages_available,
         )
