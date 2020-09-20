@@ -22,7 +22,7 @@ def search_in_soup(soup: BeautifulSoup, pattern: dict):
         pattern - dict with pattern to be found in soup.
 
     Returns:
-        ???
+        bs4.element.ResultSet object
     """
 
     return soup.findAll(**pattern)

@@ -1,9 +1,16 @@
 from typing import List
 
 from .pages_data import pages_data
-from .util import (add_prefix, create_soup, find_page_number,
-                   find_tag_in_results, get_url_content, search_in_soup,
-                   shuffle_lists)
+from .util import (
+    add_prefix,
+    create_soup,
+    filter_string,
+    find_page_number,
+    find_tag_in_results,
+    get_url_content,
+    search_in_soup,
+    shuffle_lists,
+)
 
 
 class PagesScrapper:
@@ -126,9 +133,12 @@ class PagesScrapper:
         search_result = search_in_soup(soup=soup, pattern=page_data["img_pattern"])
         images = find_tag_in_results(results=search_result, tag_to_find=page_data["img_tag"])
 
-        images_with_prefix = add_prefix(images, page_data.get("img_prefix"))
+        if page_data.get("img_prefix"):
+            filtered_images = filter_string(images, "http")
+            images_with_prefix = add_prefix(filtered_images, page_data.get("img_prefix"))
+            return images_with_prefix
 
-        return images_with_prefix
+        return images
 
     def _find_starting_page_number(self, page_data: dict) -> int:
         """Finds base page number which occurs at index page.
