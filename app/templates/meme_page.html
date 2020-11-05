@@ -1,13 +1,13 @@
 {% extends 'bootstrap/base.html' %}
 
+{%- block styles %}
+{{ super() }}
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='meme_page.css') }}"/>
+{% endblock %}
 
 {% block content %}
-    <head>
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='meme_page.css') }}"/>
-    </head>
-
-
-    <body>
 
     <center>
          <a href="{{ url_for("meme_page") }}">
@@ -81,7 +81,5 @@
             </div>
         </div>
     </div>
-
-    </body>
 
 {% endblock %}

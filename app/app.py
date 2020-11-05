@@ -1,7 +1,7 @@
 import json
 import os
 
-from flask import Flask, make_response, render_template, request
+from flask import Flask, make_response, render_template, request, send_from_directory
 from flask_bootstrap import Bootstrap
 from werkzeug.utils import redirect
 
@@ -43,6 +43,12 @@ def options():
         response.set_cookie("pages", pages)
 
         return response
+
+
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(app.root_path, 'static'),
+                               'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 
 if __name__ == "__main__":
